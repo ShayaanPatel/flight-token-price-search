@@ -5,12 +5,13 @@ export async function POST(request: Request) {
     const body = await request.json();
     
     // Fallback URL for local testing if N8N_WEBHOOK_URL is not set
-    const webhookUrl = process.env.N8N_WEBHOOK_URL || 'http://localhost:5678/webhook/flight-search';
+    const webhookUrl = process.env.N8N_WEBHOOK_URL || 'https://prowler-poet-punctuate.ngrok-free.dev/webhook/flight-search';
     
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
       },
       body: JSON.stringify(body),
     });
